@@ -12,18 +12,26 @@ public class Article {
     @Basic(optional = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Integer id;
+    private Long id;
     @Column(name = "subject", nullable = false, length = 100)
     private String subject;
     @Type(type = "text")
     @Column(name = "content", nullable = false)
     private String content;
 
-    public Integer getId() {
+    public Article() {
+    }
+
+    public Article(String subject, String content) {
+        this.subject = subject;
+        this.content = content;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -41,6 +49,15 @@ public class Article {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    @Override
+    public String toString() {
+        return "Article{" +
+                "id=" + id +
+                ", subject='" + subject + '\'' +
+                ", content='" + content + '\'' +
+                '}';
     }
 
 }

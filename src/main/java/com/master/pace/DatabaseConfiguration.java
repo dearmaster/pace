@@ -12,7 +12,7 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@EnableTransactionManagement
+//@EnableTransactionManagement
 @PropertySource("classpath:/configuration/db.properties")
 public class DatabaseConfiguration {
 
@@ -20,7 +20,7 @@ public class DatabaseConfiguration {
      * Exception will be thrown like below if not set this property to sessionFactory
      * org.hibernate.hql.internal.ast.QuerySyntaxException: Article is not mapped [from Article]
      */
-    private static final String packageToScanEntities = "com.leaf.captain.blog.model";
+    private static final String packageToScanEntities = "com.master.pace.model";
 
     @Value("${SYSTEM_DB_URL}")
     private String url;
@@ -39,7 +39,7 @@ public class DatabaseConfiguration {
     private String hibernateFormatSql;
     @Value("${hibernate.hbm2ddl.auto}")
     private String hibernateHbm2ddlAuto;
-    @Value("${hibernate.current_session_context_class}")
+    @Value("${hibernate.session_context}")
     private String hibernateCurrentSessionContextClass;
     @Value("${hibernate.hbm2ddl.import_files}")
     private String hibernateHbm2ddlImportFiles;
@@ -71,19 +71,4 @@ public class DatabaseConfiguration {
         return datasource;
     }
 
-    public String getUrl() {
-        return url;
-    }
-
-    public String getDriver() {
-        return driver;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
 }

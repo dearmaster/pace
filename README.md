@@ -30,3 +30,6 @@
         </repository>
         
 ####How to change the port for springboot
+
+####How to install Jconn4 jar
+mvn install:install-file -Dfile=D:\softwares\SAP\jConnect-16_0\classes\jconn4.jar -Dpackaging=jar -DgroupId=com.sybase -DartifactId=jconn4 -Dversion=16.0

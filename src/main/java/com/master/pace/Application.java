@@ -2,10 +2,8 @@ package com.master.pace;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 @SpringBootApplication
-@EntityScan(basePackages = "com.master.pace.model")
 public class Application {
 
     private static final String LOG4J_CONFIGURATION_FILE = "configuration/log4j.xml";
