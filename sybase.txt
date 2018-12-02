@@ -1,0 +1,62 @@
+--===================================
+-- below operations within user SA
+--===================================
+use master
+go
+sp_adduser dearmaster, dearmaster
+go
+grant create database to dearmaster
+go
+use AppDb
+go
+--add new login id, can use dear/dear971 login dataserver after this operation
+sp_addlogin dear, dear971
+go
+--add new user loginname, username
+sp_adduser dear, rw_dear
+go
+--add new group
+sp_addgroup app_group
+go
+--change group for user
+sp_changegroup app_group, rw_dear
+go
+
+
+
+--===================================
+-- below operations within user dearmaster
+--===================================
+--create devices
+use master
+go
+disk init name='app_db', physname='D:\softwares\SAP\data\app_db.dat', size='200M', dsync=true
+go
+disk init name='app_log', physname='D:\softwares\SAP\log\app_db.log', size='20M', dsync=true
+go
+--add login
+sp_addlogin dearmaster, dearmaster
+go
+--add user in master db to ensure it has privileges to create database
+sp_adduser dearmaster, dearmaster
+go
+grant create database to dearmaster
+go
+--create database using account dearmaster, then dearmaster will be the DBO
+create database AppDb on app_db = '20M' log on app_log = '5M'
+go
+--change schema
+use AppDb
+go
+--grant privilege
+grant create database to dearmaster
+go
+--drop device
+sp_dropdevice app_log
+go
+--revoke privileges
+revoke create table, create procedure to rw_dear
+go
+--grant privileges
+grant create table, create procedure to app_group
+go
