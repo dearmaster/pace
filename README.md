@@ -33,3 +33,12 @@
 
 ####How to install Jconn4 jar
 mvn install:install-file -Dfile=D:\softwares\SAP\jConnect-16_0\classes\jconn4.jar -Dpackaging=jar -DgroupId=com.sybase -DartifactId=jconn4 -Dversion=16.0
+
+####How to fix warn '010SK: Database cannot set connection option SET_READONLY_FALSE.'
+dbcc reindex(spt_mda)
+update spt_mda set querytype = 4, query = '0' where mdinfo = 'SET_READONLY_TRUE' -- default is 3, ''
+update spt_mda set querytype = 4, query = '0' where mdinfo = 'SET_READONLY_FALSE'
+
+####How to import test data
+hibernate.hbm2ddl.import_files=/data-import/syb-import-data.sql
+*Attention: This doesn't work when the hibernate.hbm2ddl.auto is set to update
